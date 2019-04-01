@@ -102,7 +102,7 @@ func (r *ReleaseHandler) Run() error {
 	}
 
 	if exists {
-		return fmt.Errorf("Tag %q already exists", tag)
+		return fmt.Errorf("tag %q already exists", tag)
 	}
 
 	var changeLogFromTag string
@@ -295,12 +295,6 @@ func (r *ReleaseHandler) bumpVersions(ver hugo.Version) error {
 
 	if err := r.replaceInFile("commands/new.go",
 		`min_version = "(.*)"`, fmt.Sprintf(`min_version = "%s"`, minVersion)); err != nil {
-		return err
-	}
-
-	// docs/config.toml
-	if err := r.replaceInFile("docs/config.toml",
-		`release = "(.*)"`, fmt.Sprintf(`release = "%s"`, ver)); err != nil {
 		return err
 	}
 

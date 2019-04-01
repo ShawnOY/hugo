@@ -1,4 +1,4 @@
-// Copyright 2018 The Hugo Authors. All rights reserved.
+// Copyright 2019 The Hugo Authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ func TestAlias(t *testing.T) {
 	b.CreateSites().Build(BuildCfg{})
 
 	assert.Equal(1, len(b.H.Sites))
-	require.Len(t, b.H.Sites[0].RegularPages, 1)
+	require.Len(t, b.H.Sites[0].RegularPages(), 1)
 
 	// the real page
 	b.AssertFileContent("public/page/index.html", "For some moments the old man")
@@ -80,7 +80,7 @@ func TestAliasMultipleOutputFormats(t *testing.T) {
 
 	// the alias redirectors
 	b.AssertFileContent("public/foo/bar/index.html", "<meta http-equiv=\"refresh\" content=\"0; ")
-	b.AssertFileContent("public/foo/bar/amp/index.html", "<meta http-equiv=\"refresh\" content=\"0; ")
+	b.AssertFileContent("public/amp/foo/bar/index.html", "<meta http-equiv=\"refresh\" content=\"0; ")
 	assert.False(b.CheckExists("public/foo/bar/index.json"))
 }
 
